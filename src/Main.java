@@ -20,7 +20,6 @@ public class Main {
 //        System.out.println(mod.getTaskList());
 //        mod.getDateTask();
 
-
         Scanner scanner = new Scanner(System.in);
         UtilityClass utilityClass = new UtilityClass();
 
