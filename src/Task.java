@@ -1,36 +1,40 @@
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
-public class Task {
+public abstract class  Task {
     private static int idGenerator = 0;
-    private static Calendar timeTask = new GregorianCalendar();
+    private  Calendar timeTask = new GregorianCalendar();
+    private LocalDate timeDoneTask;
     private  String header;
     private  String description;
     private  Type type;
     private int id;
-    private taskRepeatability taskRepeatability;
-    public Task(String header, String description, Type type, taskRepeatability taskRepeatability) {
+    private TaskRepeatability taskRepeatability;
+    public Task(String header, String description, Type type, TaskRepeatability taskRepeatability, LocalDate localDate) {
         this.header = header;
         this.description = description;
         this.type = type;
         this.taskRepeatability = taskRepeatability;
         this.timeTask = Calendar.getInstance();
         this.id = idGenerator++;
+        this.timeDoneTask = localDate;
 
     }
 
     public Task() {
     }
 
-    public enum taskRepeatability {
-        ONE_TAME_TASK,
-        YEARLY_TASK,
-        DAILY_TASK,
-        MONTH_TASK,
-        WEEKLY_TASK;
+    public abstract boolean appearshIn(LocalDate date);
 
+    public TaskRepeatability getTaskRepeatability() {
+        return taskRepeatability;
+    }
+
+    public void setTaskRepeatability(TaskRepeatability taskRepeatability) {
+        this.taskRepeatability = taskRepeatability;
     }
 
     public void deadLineTask() {
@@ -111,9 +115,17 @@ public class Task {
     public int getId() {
         return id;
     }
+    public LocalDate getTimeDoneTask() {
+        return timeDoneTask;
+    }
+
+    public void setTimeDoneTask(LocalDate timeDoneTask) {
+        this.timeDoneTask = timeDoneTask;
+    }
 
     public  Date getTimeTask() {
         return timeTask.getTime();
     }
 }
+
 

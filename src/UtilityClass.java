@@ -13,10 +13,30 @@ public class UtilityClass {
         Scanner scanner = new Scanner(System.in);
     }
 
-    public void addTask1(String header, String descriptions, Type type, Task.taskRepeatability repeatability) throws IncorrectArgumentTaskException {
-
-        Task task = new Task(header, descriptions, type, repeatability);
-        try {
+    public void addTask1(String header, String descriptions, Type type, TaskRepeatability repeatability, LocalDate date) throws IncorrectArgumentTaskException {
+        Task task;
+        switch (repeatability) {
+            case MONTH_TASK: {
+                task = new MonthTask(header, descriptions, type, repeatability, date);
+                break;
+            }
+            case ONE_TAME_TASK:{
+                task = new OneTimeTask(header, descriptions, type, repeatability, date);
+            }
+            case DAILY_TASK:{
+                task = new OneTimeTask(header, descriptions, type, repeatability, date);
+            }
+            case WEEKLY_TASK:{
+                task = new OneTimeTask(header, descriptions, type, repeatability, date);
+            }
+            case YEARLY_TASK:{
+                task = new OneTimeTask(header, descriptions, type, repeatability, date);
+            }
+            default:{
+                System.out.println("Данный тип не поддерживается");
+                return;}
+        }
+            try {
             taskMap.put(task.getId(), task);
         } catch (EnumConstantNotPresentException e) {
             throw new IncorrectArgumentTaskException("некорректно введены данные");
@@ -53,26 +73,35 @@ public class UtilityClass {
     }
 
 
-    public void getDateTask() {
-        Map<Integer, Task> integerTaskMap = new HashMap<>();
-        integerTaskMap.entrySet().stream()
-                .map(Map.Entry::getValue)
-                .filter(integerTaskEntry -> test()).toList()
-                .forEach(System.out::println);
+//    public void getDateTask() {
+//        taskMap.values().stream()
+//                .filter(integerTaskEntry -> test()).toList()
+//                .forEach(System.out::println);
 
-    }
+//    }
 
-    public void getDateTask1() {
-        Calendar now = Calendar.getInstance();
-        Task task = new Task();
-        System.out.println("Задачи на сегодня");
-        for (Integer task1 : this.taskMap.keySet()) {
-            if(task.getTimeTask().equals(now.getTime())){
+//    public void getDateTask1() {
+//        Calendar now = Calendar.getInstance();
+//
+//          Task task = new Task();
+//        System.out.println("Задачи на сегодня");
+//        for (Integer task1 : this.taskMap.keySet()) {
+//            if(task.getTimeTask().equals(now.getTime())){
+//                System.out.println(task1);
+//            }
+//        }
+//    }
+    public void getDateTaskNew() {
+        Scanner scanner = new Scanner(System.in);
+        LocalDate date =  LocalDate.of(scanner.nextInt(),scanner.nextInt(),scanner.nextInt());
+        for (Task task1 : this.taskMap.values()) {
+            if(task1.appearshIn(date)){
+                System.out.println("Задачи на сегодня");
                 System.out.println(task1);
             }
         }
     }
-    public void deleteTask ()  {
+    public void deleteTask () throws TaskNotFoundException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите номер задачи для удаления");
         int id = scanner.nextInt();
@@ -80,25 +109,25 @@ public class UtilityClass {
         if (removedTask != null) {
             System.out.println("Задача с "+ id + " удалена");
         }else {
-            System.out.println("Задача не найдена");
+            throw new TaskNotFoundException("Задача не найдена");
         }
+    }
 
+    public void deleteTask1(Task id) {
+        taskMap.entrySet().stream()
+                 .map(Map.Entry::getValue)
+                    .collect(Collectors.toList())
+                    .forEach(System.out::println);
 
 
     }
-//            integerStringMap.entrySet().stream()
-//                    .map(Map.Entry::getValue)
-//                    .collect(Collectors.toList())
-//                    .forEach(System.out::println);
 
-
-
-    private static boolean test () {
-        Calendar timeToday = Calendar.getInstance();
-        Task task = new Task();
-        Date r = task.getTimeTask();
-        return r.equals(timeToday.getTime());
-    }
+//    private static boolean test () {
+//        Calendar timeToday = Calendar.getInstance();
+////        Task task = new Task();
+//        Date r = task.getTimeTask();
+//        return r.equals(timeToday.getTime());
+//    }
 
     @Override
     public String toString () {
