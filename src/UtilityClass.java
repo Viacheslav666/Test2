@@ -20,7 +20,10 @@ public class UtilityClass {
                 task = new MonthTask(header, descriptions, type, repeatability, date);
                 break;
             }
-            case ONE_TAME_TASK:
+            case ONE_TAME_TASK:{
+                task = new OneTimeTask(header, descriptions, type, repeatability, date);
+                break;
+        }
             case DAILY_TASK: {
                 task = new OneTimeTask(header, descriptions, type, repeatability, date);
                 break;
