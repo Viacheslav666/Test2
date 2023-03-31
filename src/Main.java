@@ -7,18 +7,6 @@ import static java.lang.Thread.sleep;
 public class Main {
     public static void main(String[] args) throws IncorrectArgumentTaskException, TaskNotFoundException {
 
-//        Task monday = new Task("lover", "Popsa", Type.PERSONAL, Task.taskRepeatability.DAILY_TASK);
-//        Task tuesday = new Task("Kotler", "Marketing", Type.PROFESSIONAL, Task.taskRepeatability.YEARLY_TASK);
-//        Task wednesday = new Task("Tatu", "Bisnes", Type.PERSONAL, Task.taskRepeatability.MONTH_TASK);
-//        System.out.println(monday);
-//        System.out.println(tuesday);
-//        System.out.println(wednesday);
-//        UtilityClass mod = new UtilityClass();
-//        mod.addTask(monday);
-//        mod.addTask(wednesday);
-//        mod.addTask(tuesday);
-//        System.out.println(mod.getTaskList());
-//        mod.getDateTask();
 
         Scanner scanner = new Scanner(System.in);
         UtilityClass utilityClass = new UtilityClass();

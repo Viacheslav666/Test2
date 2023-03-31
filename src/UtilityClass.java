@@ -20,17 +20,18 @@ public class UtilityClass {
                 task = new MonthTask(header, descriptions, type, repeatability, date);
                 break;
             }
-            case ONE_TAME_TASK:{
+            case ONE_TAME_TASK:
+            case DAILY_TASK: {
                 task = new OneTimeTask(header, descriptions, type, repeatability, date);
-            }
-            case DAILY_TASK:{
-                task = new OneTimeTask(header, descriptions, type, repeatability, date);
+                break;
             }
             case WEEKLY_TASK:{
                 task = new OneTimeTask(header, descriptions, type, repeatability, date);
+                break;
             }
             case YEARLY_TASK:{
                 task = new OneTimeTask(header, descriptions, type, repeatability, date);
+                break;
             }
             default:{
                 System.out.println("Данный тип не поддерживается");

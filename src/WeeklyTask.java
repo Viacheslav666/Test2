@@ -10,7 +10,7 @@ public class WeeklyTask extends Task {
 
     @Override
     public boolean appearshIn(LocalDate date) {
-        if(date.plusWeeks(1) == getTimeDoneTask().plusWeeks(1)){
+        if(date.getDayOfWeek() == getTimeDoneTask().getDayOfWeek()){
             return true;
         }else {
             return false;}

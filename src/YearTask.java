@@ -10,7 +10,7 @@ public class YearTask extends Task {
 
     @Override
     public boolean appearshIn(LocalDate date) {
-        if (date.plusYears(1) == getTimeDoneTask().plusYears(1)) {
+        if (date.getDayOfYear()== getTimeDoneTask().getDayOfYear()) {
             return true;
         } else {
             return false;
